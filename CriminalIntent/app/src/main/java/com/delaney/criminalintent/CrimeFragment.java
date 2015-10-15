@@ -1,10 +1,13 @@
 package com.delaney.criminalintent;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +15,8 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.Toast;
+
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.UUID;
@@ -36,11 +41,23 @@ public class CrimeFragment extends Fragment {
         return fragment;
     }
 
+
+    public void returnResult(){
+        Intent data = new Intent();
+        data.putExtra(ARG_CRIME_ID, mCrime.getId().toString());
+        getActivity().setResult(Activity.RESULT_OK, data);
+    }
+
+    public static String returnId(Intent result){
+        return result.getStringExtra(ARG_CRIME_ID);
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        UUID crimeId = (UUID) getActivity().getIntent().getSerializableExtra(CrimeActivity.EXTRA_CRIME_ID);
+        UUID crimeId = (UUID) getArguments().getSerializable(ARG_CRIME_ID);
         mCrime = CrimeLab.get(getActivity()).getCrime(crimeId);
+        returnResult();
     }
 
     @Override
