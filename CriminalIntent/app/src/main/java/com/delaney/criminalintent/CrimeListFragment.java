@@ -55,7 +55,8 @@ public class CrimeListFragment extends Fragment {
             mCrimeRecyclerView.setAdapter(mAdapter);
         }
         else{
-            mAdapter.notifyItemChanged(toUpdate);
+            Toast.makeText(getActivity(), (toUpdate - 1) + " Inside Update Correct", Toast.LENGTH_SHORT).show();
+            mAdapter.notifyItemChanged(toUpdate - 1);
         }
     }
 
@@ -64,14 +65,16 @@ public class CrimeListFragment extends Fragment {
 
         if (requestCode == REQUEST_CRIME) {
             if (resultCode == Activity.RESULT_OK) {
+                Toast.makeText(getActivity(), "HERE clicked!", Toast.LENGTH_SHORT).show();
                 CrimeLab crimeLab = CrimeLab.get(getActivity());
                 List<Crime> crimes = crimeLab.getCrimes();
                 String adjusted = CrimeFragment.returnId(data);
+                Toast.makeText(getActivity(), adjusted + "HERE clicked!", Toast.LENGTH_SHORT).show();
                 int size = crimes.size();
                 for (int i = 0; i < size; i++) {
                     if (crimes.get(i).getId().toString().equals(adjusted)) {
-                        Toast.makeText(getActivity(), toUpdate + " clicked!", Toast.LENGTH_SHORT).show();
                         toUpdate = i;
+                        Toast.makeText(getActivity(), (toUpdate - 1) + " clicked!", Toast.LENGTH_SHORT).show();
                         i = size;
                     }
                 }
@@ -102,7 +105,7 @@ public class CrimeListFragment extends Fragment {
         public void onClick(View v){
 //            Toast.makeText(getActivity(), mCrime.getTitle() + " clicked!", Toast.LENGTH_SHORT).show();
 
-            Intent intent = CrimeActivity.newIntent(getActivity(), mCrime.getId());
+            Intent intent = CrimePagerActivity.newIntent(getActivity(), mCrime.getId());
             startActivityForResult(intent, REQUEST_CRIME);
         }
 
