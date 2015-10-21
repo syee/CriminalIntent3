@@ -26,7 +26,7 @@ public class CrimeListFragment extends Fragment {
     private CrimeAdapter mAdapter;
     private Crime mCrime;
     private static final String ARG_CRIME_POSITION = "crime_position";
-    int toUpdate;
+    private int toUpdate;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
@@ -75,7 +75,7 @@ public class CrimeListFragment extends Fragment {
                     if (crimes.get(i).getId().toString().equals(adjusted)) {
                         toUpdate = i;
                         Toast.makeText(getActivity(), (toUpdate - 1) + " clicked!", Toast.LENGTH_SHORT).show();
-                        i = size;
+                        return;
                     }
                 }
             }
