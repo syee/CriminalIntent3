@@ -55,8 +55,8 @@ public class CrimeListFragment extends Fragment {
             mCrimeRecyclerView.setAdapter(mAdapter);
         }
         else{
-            Toast.makeText(getActivity(), (toUpdate - 1) + " Inside Update Correct", Toast.LENGTH_SHORT).show();
-            mAdapter.notifyItemChanged(toUpdate - 1);
+            Toast.makeText(getActivity(), (toUpdate) + " Inside Update Correct", Toast.LENGTH_SHORT).show();
+            mAdapter.notifyItemChanged(toUpdate);
         }
     }
 
@@ -73,8 +73,8 @@ public class CrimeListFragment extends Fragment {
                 int size = crimes.size();
                 for (int i = 0; i < size; i++) {
                     if (crimes.get(i).getId().toString().equals(adjusted)) {
-                        toUpdate = i;
-                        Toast.makeText(getActivity(), (toUpdate - 1) + " clicked!", Toast.LENGTH_SHORT).show();
+                        toUpdate = i - 1;
+                        Toast.makeText(getActivity(), (toUpdate) + " clicked!", Toast.LENGTH_SHORT).show();
                         return;
                     }
                 }
