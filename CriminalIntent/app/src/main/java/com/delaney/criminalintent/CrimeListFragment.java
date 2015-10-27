@@ -176,4 +176,6 @@ public class CrimeListFragment extends Fragment {
             return mCrimes.size();
         }
     }
+    
+    //
 }
